@@ -2,6 +2,12 @@ doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
 
+        types:
+            id: App\User\Domain\Type\IdType
+            user_login: App\User\Domain\Type\LoginType
+            user_phone: App\User\Domain\Type\PhoneType
+            user_role: App\User\Domain\Type\RoleType
+
         profiling_collect_backtrace: '%kernel.debug%'
         use_savepoints: true
     orm:
@@ -12,12 +18,12 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: true
         mappings:
-            App:
+            User:
                 type: attribute
                 is_bundle: false
-                dir: '%kernel.project_dir%/src/Entity'
-                prefix: 'App\Entity'
-                alias: App
+                dir: '%kernel.project_dir%/src/User/Domain'
+                prefix: 'App\User\Domain'
+                alias: User
         controller_resolver:
             auto_mapping: false
 
