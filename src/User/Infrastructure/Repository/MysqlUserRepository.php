@@ -6,6 +6,7 @@ namespace App\User\Infrastructure\Repository;
 
 use App\User\Domain\Entity\User;
 use App\User\Domain\Repository\UserRepositoryInterface;
+use App\User\Domain\ValueObject\Id;
 use App\User\Domain\ValueObject\Login;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -29,5 +30,21 @@ final class MysqlUserRepository extends ServiceEntityRepository implements UserR
         $user = $this->findOneBy(['login' => $login->getValue()]);
 
         return null !== $user;
+    }
+
+    public function hasById(Id $id): bool
+    {
+        $user = $this->find($id->getValue());
+
+        return null !== $user;
+    }
+
+    public function delete(Id $id): void
+    {
+        /** @var User $user */
+        $user = $this->find($id->getValue());
+
+        $this->getEntityManager()->remove($user);
+        $this->getEntityManager()->flush();
     }
 }
