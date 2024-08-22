@@ -10,7 +10,7 @@ RUN apk update && apk add --no-cache \
     git \
     curl
 
-RUN docker-php-ext-install pdo pdo_pgsql pgsql mbstring exif pcntl bcmath gd
+RUN docker-php-ext-install pdo pdo_pgsql pdo_mysql pgsql mbstring exif pcntl bcmath gd
 
 RUN apk add --no-cache autoconf g++ make
 
