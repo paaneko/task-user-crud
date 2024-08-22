@@ -1,0 +1,3 @@
+controllerUser:
+    resource: ../src/User/Infrastructure/Controller/Api/v1/
+    type: attribute
