@@ -25,6 +25,11 @@ final class MysqlUserRepository extends ServiceEntityRepository implements UserR
         $this->getEntityManager()->flush();
     }
 
+    public function findByLogin(Login $login): ?User
+    {
+        return $this->findOneBy(['login' => $login->getValue()]);
+    }
+
     public function hasByLogin(Login $login): bool
     {
         $user = $this->findOneBy(['login' => $login->getValue()]);

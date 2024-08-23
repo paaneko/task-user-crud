@@ -6,7 +6,6 @@ doctrine:
             id: App\User\Domain\Type\IdType
             user_login: App\User\Domain\Type\LoginType
             user_phone: App\User\Domain\Type\PhoneType
-            user_role: App\User\Domain\Type\RoleType
 
         profiling_collect_backtrace: '%kernel.debug%'
         use_savepoints: true

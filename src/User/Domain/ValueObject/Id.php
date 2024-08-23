@@ -26,4 +26,9 @@ final class Id
     {
         return $this->value;
     }
+
+    public function equals(string $id): bool
+    {
+        return $this->value === $id;
+    }
 }

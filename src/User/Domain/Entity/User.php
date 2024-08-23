@@ -7,11 +7,9 @@ namespace App\User\Domain\Entity;
 use App\User\Domain\Type\IdType;
 use App\User\Domain\Type\LoginType;
 use App\User\Domain\Type\PhoneType;
-use App\User\Domain\Type\RoleType;
 use App\User\Domain\ValueObject\Id;
 use App\User\Domain\ValueObject\Login;
 use App\User\Domain\ValueObject\Phone;
-use App\User\Domain\ValueObject\Role;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -32,21 +30,16 @@ final class User
     #[ORM\Column(type: Types::STRING, length: 255)]
     private string $hashedPassword;
 
-    #[ORM\Column(type: RoleType::NAME, length: 8)]
-    private Role $role;
-
     public function __construct(
         Id $userId,
         Login $login,
         Phone $phone,
-        string $hashedPassword,
-        Role $role
+        string $hashedPassword
     ) {
         $this->userId = $userId;
         $this->login = $login;
         $this->phone = $phone;
         $this->hashedPassword = $hashedPassword;
-        $this->role = $role;
     }
 
     public function getId(): Id
@@ -62,11 +55,6 @@ final class User
     public function getPhone(): Phone
     {
         return $this->phone;
-    }
-
-    public function getRole(): Role
-    {
-        return $this->role;
     }
 
     public function getHashedPassword(): string

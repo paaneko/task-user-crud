@@ -6,6 +6,7 @@ namespace App\User\Application\UseCase\RegisterUser;
 
 use App\User\Domain\Entity\User;
 use App\User\Domain\Exception\LoginAlreadyRegisteredException;
+use App\User\Domain\Exception\RolePermissionDeniedException;
 use App\User\Domain\Repository\UserRepositoryInterface;
 use App\User\Domain\ValueObject\Id;
 use App\User\Domain\ValueObject\Login;
@@ -35,7 +36,6 @@ final class RegisterUserCommandHandler
             $login,
             new Phone($command->phone),
             $userPasswordHasher->hash($command->pass),
-            Role::user()
         );
 
         $this->userRepository->save($user);

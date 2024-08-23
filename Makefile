@@ -1,6 +1,6 @@
 PHP_RUN = docker compose run --rm php
 
-init: build composer-install up migrate swagger-generate
+init: build composer-install up generate-keypair migrate swagger-generate
 
 build:
 	docker compose build
@@ -55,3 +55,6 @@ infection:
 
 swagger-generate:
 	${PHP_RUN} ./vendor/bin/openapi -o docs/swagger.json src
+
+generate-keypair:
+	${PHP_RUN} php bin/console lexik:jwt:generate-keypair

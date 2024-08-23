@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\User\Infrastructure\Controller\Api\v1;
 
+use App\User\Application\Dto\AuthUserDto;
 use App\User\Application\UseCase\RegisterUser\RegisterUserCommand;
 use App\User\Application\UseCase\RegisterUser\RegisterUserCommandHandler;
+use App\User\Domain\Exception\UnauthorizedAccessException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,7 +33,15 @@ final class RegisterUserController extends AbstractController
             JSON_THROW_ON_ERROR
         );
 
+        /** @var AuthUserDto|null $authUserDto */
+        $authUserDto = $request->attributes->get('authUser');
+
+        if (null === $authUserDto) {
+            throw new UnauthorizedAccessException();
+        }
+
         $registerUserCommand = new RegisterUserCommand(
+            $authUserDto,
             $parameters['id'],
             $parameters['login'],
             $parameters['phone'],

@@ -20,23 +20,12 @@ final class UserBuilder
 
     private string $hashedPassword;
 
-    private Role $role;
-
     public function __construct()
     {
         $this->userId = new Id('1');
         $this->login = new Login('login');
         $this->phone = new Phone('12345678');
         $this->hashedPassword = 'hash';
-        $this->role = Role::user();
-    }
-
-    public function admin(): self
-    {
-        $clone = clone $this;
-        $clone->role = Role::admin();
-
-        return $clone;
     }
 
     public function withId(string $id): self
@@ -78,7 +67,6 @@ final class UserBuilder
             $this->login,
             $this->phone,
             $this->hashedPassword,
-            $this->role
         );
     }
 }

@@ -12,6 +12,8 @@ interface UserRepositoryInterface
 {
     public function save(User $user): void;
 
+    public function findByLogin(Login $login): ?User;
+
     public function hasByLogin(Login $login): bool;
 
     public function hasById(Id $id): bool;
