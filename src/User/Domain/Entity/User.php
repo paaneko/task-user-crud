@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\User\Domain\Entity;
 
+use App\User\Domain\Exception\SimilarPasswordException;
 use App\User\Domain\Type\IdType;
 use App\User\Domain\Type\LoginType;
 use App\User\Domain\Type\PhoneType;
@@ -40,6 +41,17 @@ final class User
         $this->login = $login;
         $this->phone = $phone;
         $this->hashedPassword = $hashedPassword;
+    }
+
+    public function update(Phone $newPhone, string $newHashedPassword): void
+    {
+        $this->phone = $newPhone;
+
+        if ($this->hashedPassword === $newHashedPassword) {
+            throw new SimilarPasswordException();
+        }
+
+        $this->hashedPassword = $newHashedPassword;
     }
 
     public function getId(): Id

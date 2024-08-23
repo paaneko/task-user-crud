@@ -22,4 +22,9 @@ final class Login
     {
         return $this->value;
     }
+
+    public function equals(string $login): bool
+    {
+        return $this->value === $login;
+    }
 }
