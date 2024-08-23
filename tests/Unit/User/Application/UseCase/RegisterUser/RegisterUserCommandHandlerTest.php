@@ -19,7 +19,6 @@ final class RegisterUserCommandHandlerTest extends TestCase
     public function testCanHandle(): void
     {
         $expectedUser = (new UserBuilder())->build();
-        $authUserDto = (new AuthUserDtoBuilder())->fromUser($expectedUser)->build();
         $userRepository = $this->createMock(UserRepositoryInterface::class);
         $userRepository->expects($this->once())->method('hasByLogin')
             ->willReturn(false);
@@ -31,7 +30,6 @@ final class RegisterUserCommandHandlerTest extends TestCase
         $passwordHasherFactory->method('getPasswordHasher')->willReturn($passwordHasher);
 
         $registerUserCommand = new RegisterUserCommand(
-            $authUserDto,
             $expectedUser->getId()->getValue(),
             $expectedUser->getLogin()->getValue(),
             $expectedUser->getPhone()->getValue(),
@@ -51,7 +49,6 @@ final class RegisterUserCommandHandlerTest extends TestCase
     public function testCanHandleLoginAlreadyRegistered(): void
     {
         $existingUser = (new UserBuilder())->build();
-        $authUserDto = (new AuthUserDtoBuilder())->fromUser($existingUser)->build();
         $userRepository = $this->createMock(UserRepositoryInterface::class);
         $userRepository->expects($this->once())->method('hasByLogin')
             ->willReturn(true);
@@ -61,7 +58,6 @@ final class RegisterUserCommandHandlerTest extends TestCase
         $passwordHasherFactory->method('getPasswordHasher')->willReturn($passwordHasher);
 
         $registerUserCommand = new RegisterUserCommand(
-            $authUserDto,
             $existingUser->getId()->getValue(),
             $existingUser->getLogin()->getValue(),
             $existingUser->getPhone()->getValue(),
