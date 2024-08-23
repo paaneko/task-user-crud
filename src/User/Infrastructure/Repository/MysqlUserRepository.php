@@ -25,7 +25,7 @@ final class MysqlUserRepository extends ServiceEntityRepository implements UserR
         $this->getEntityManager()->flush();
     }
 
-    public function findById(Id $id): User
+    public function findById(Id $id): ?User
     {
         return $this->find($id->getValue());
     }

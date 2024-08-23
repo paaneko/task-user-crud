@@ -15,7 +15,7 @@ final readonly class GetUserCommand
     #[Assert\Length(max: 8)]
     public string $userId;
 
-    public function __construct(AuthUserDto $authUserDto, $userId)
+    public function __construct(AuthUserDto $authUserDto, string $userId)
     {
         $this->authUserDto = $authUserDto;
         $this->userId = $userId;

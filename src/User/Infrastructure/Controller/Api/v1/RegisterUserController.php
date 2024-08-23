@@ -41,7 +41,6 @@ final class RegisterUserController extends AbstractController
         }
 
         $registerUserCommand = new RegisterUserCommand(
-            $authUserDto,
             $parameters['id'],
             $parameters['login'],
             $parameters['phone'],
