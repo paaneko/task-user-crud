@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\User\Application\UseCase\GetUser;
 
 use App\User\Domain\Entity\User;
@@ -7,12 +9,9 @@ use App\User\Domain\Exception\RolePermissionDeniedException;
 use App\User\Domain\Exception\UserNotFoundException;
 use App\User\Domain\Repository\UserRepositoryInterface;
 use App\User\Domain\ValueObject\Id;
-use App\User\Domain\ValueObject\Login;
 use App\User\Domain\ValueObject\Role;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 
-class GetUserCommandHandler
+final class GetUserCommandHandler
 {
     public function __construct(
         private UserRepositoryInterface $userRepository,
@@ -23,7 +22,7 @@ class GetUserCommandHandler
     {
         $authUserRole = new Role($command->authUserDto->role);
 
-        if (!$user = $this->userRepository->findById((new Id($command->userId)))) {
+        if (!$user = $this->userRepository->findById(new Id($command->userId))) {
             throw new UserNotFoundException();
         }
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\User\Application\UseCase\PutUser;
 
 use App\User\Domain\Entity\User;
@@ -13,7 +15,7 @@ use App\User\Domain\ValueObject\Role;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 
-class PutUserCommandHandler
+final class PutUserCommandHandler
 {
     public function __construct(
         private UserRepositoryInterface $userRepository,

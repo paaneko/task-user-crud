@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\User\Application\UseCase\PutUser;
 
 use App\User\Application\Dto\AuthUserDto;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class PutUserCommand
+final class PutUserCommand
 {
     public AuthUserDto $authUserDto;
 

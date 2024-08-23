@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\User\Application\UseCase\GetUser;
 
 use App\User\Application\Dto\AuthUserDto;
-
 use Symfony\Component\Validator\Constraints as Assert;
 
 final readonly class GetUserCommand

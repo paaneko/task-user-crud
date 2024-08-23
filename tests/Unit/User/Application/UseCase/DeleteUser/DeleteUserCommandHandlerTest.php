@@ -6,7 +6,6 @@ namespace App\Tests\Unit\User\Application\UseCase\DeleteUser;
 
 use App\Tests\Builder\AuthUserDtoBuilder;
 use App\Tests\Builder\UserBuilder;
-use App\User\Application\Dto\AuthUserDto;
 use App\User\Application\UseCase\DeleteUser\DeleteUserCommand;
 use App\User\Application\UseCase\DeleteUser\DeleteUserCommandHandler;
 use App\User\Domain\Exception\RolePermissionDeniedException;

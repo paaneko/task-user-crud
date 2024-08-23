@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace App\User\Infrastructure\Controller\Api\v1;
 
 use App\User\Application\Dto\AuthUserDto;
-use App\User\Application\UseCase\DeleteUser\DeleteUserCommand;
-use App\User\Application\UseCase\DeleteUser\DeleteUserCommandHandler;
 use App\User\Application\UseCase\PutUser\PutUserCommand;
 use App\User\Application\UseCase\PutUser\PutUserCommandHandler;
 use App\User\Domain\Exception\UnauthorizedAccessException;
@@ -17,7 +15,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Validator\Exception\ValidationFailedException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class PutUserController extends AbstractController
+final class PutUserController extends AbstractController
 {
     public function __construct(
         private ValidatorInterface $validator,
@@ -38,7 +36,7 @@ class PutUserController extends AbstractController
         /** @var AuthUserDto|null $authUserDto */
         $authUserDto = $request->attributes->get('authUser');
 
-        if ($authUserDto === null) {
+        if (null === $authUserDto) {
             throw new UnauthorizedAccessException();
         }
 
@@ -57,6 +55,6 @@ class PutUserController extends AbstractController
 
         $userId = $this->commandHandler->handle($putUserCommand);
 
-        return $this->json(['id' => $userId->getValue()],Response::HTTP_OK);
+        return $this->json(['id' => $userId->getValue()], Response::HTTP_OK);
     }
 }

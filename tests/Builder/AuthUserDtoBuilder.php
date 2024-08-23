@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Builder;
 
 use App\User\Application\Dto\AuthUserDto;
 use App\User\Domain\Entity\User;
 use App\User\Domain\ValueObject\Role;
 
-class AuthUserDtoBuilder
+final class AuthUserDtoBuilder
 {
     private string $userId;
 
@@ -24,6 +26,7 @@ class AuthUserDtoBuilder
         $clone = clone $this;
         $clone->userId = $user->getId()->getValue();
         $clone->login = $user->getLogin()->getValue();
+
         return $clone;
     }
 
@@ -31,6 +34,7 @@ class AuthUserDtoBuilder
     {
         $clone = clone $this;
         $clone->role = $role->getValue();
+
         return $clone;
     }
 

@@ -6,12 +6,10 @@ namespace App\User\Application\UseCase\RegisterUser;
 
 use App\User\Domain\Entity\User;
 use App\User\Domain\Exception\LoginAlreadyRegisteredException;
-use App\User\Domain\Exception\RolePermissionDeniedException;
 use App\User\Domain\Repository\UserRepositoryInterface;
 use App\User\Domain\ValueObject\Id;
 use App\User\Domain\ValueObject\Login;
 use App\User\Domain\ValueObject\Phone;
-use App\User\Domain\ValueObject\Role;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 
 final class RegisterUserCommandHandler

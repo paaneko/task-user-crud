@@ -36,7 +36,7 @@ final class DeleteUserController extends AbstractController
         /** @var AuthUserDto|null $authUserDto */
         $authUserDto = $request->attributes->get('authUser');
 
-        if ($authUserDto === null) {
+        if (null === $authUserDto) {
             throw new UnauthorizedAccessException();
         }
 

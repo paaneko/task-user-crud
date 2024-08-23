@@ -6,7 +6,6 @@ namespace App\User\Application\Middleware;
 
 use App\User\Application\Service\JWTServiceInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
@@ -21,7 +20,7 @@ final class AuthenticateUserRequestMiddleware implements EventSubscriberInterfac
         $request = $requestEvent->getRequest();
         $authorizationHeader = $request->headers->get('Authorization');
 
-        if ($authorizationHeader !== null) {
+        if (null !== $authorizationHeader) {
             $jwt = $this->extractBearerToken($authorizationHeader);
             $authUser = $this->JWTService->decode($jwt);
             $request->attributes->set('authUser', $authUser);

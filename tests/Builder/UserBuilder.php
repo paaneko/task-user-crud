@@ -8,7 +8,6 @@ use App\User\Domain\Entity\User;
 use App\User\Domain\ValueObject\Id;
 use App\User\Domain\ValueObject\Login;
 use App\User\Domain\ValueObject\Phone;
-use App\User\Domain\ValueObject\Role;
 
 final class UserBuilder
 {
