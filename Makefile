@@ -1,6 +1,6 @@
 PHP_RUN = docker compose run --rm php
 
-init: build composer-install up generate-keypair migrate swagger-generate
+init: build composer-install up generate-keypair migrate load-fixtures
 
 build:
 	docker compose build
@@ -58,3 +58,6 @@ swagger-generate:
 
 generate-keypair:
 	${PHP_RUN} php bin/console lexik:jwt:generate-keypair
+
+load-fixtures:
+	${PHP_RUN} php bin/console doctrine:fixtures:load
