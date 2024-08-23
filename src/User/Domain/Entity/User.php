@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
 #[ORM\Table]
-final class User
+class User
 {
     #[ORM\Id]
     #[ORM\Column(type: IdType::NAME, length: 8)]

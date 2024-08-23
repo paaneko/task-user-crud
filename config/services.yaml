@@ -30,3 +30,8 @@ services:
     App\User\Application\Middleware\AuthenticateUserRequestMiddleware:
         tags:
             - { name: 'kernel.event_subscriber' }
+
+    App\Shared\Common\Listener\ExceptionListener:
+        arguments: [ '%kernel.environment%' ]
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
