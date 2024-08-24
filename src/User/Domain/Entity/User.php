@@ -53,11 +53,6 @@ class User
     public function update(Phone $newPhone, string $newHashedPassword): void
     {
         $this->phone = $newPhone;
-
-        if ($this->hashedPassword === $newHashedPassword) {
-            throw new SimilarPasswordException();
-        }
-
         $this->hashedPassword = $newHashedPassword;
     }
 
