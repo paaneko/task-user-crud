@@ -13,6 +13,8 @@ use App\User\Domain\ValueObject\Login;
 use App\User\Domain\ValueObject\Phone;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
+use Symfony\Component\Serializer\Attribute\SerializedName;
 
 #[ORM\Entity]
 #[ORM\Table]
@@ -20,24 +22,29 @@ class User
 {
     #[ORM\Id]
     #[ORM\Column(type: IdType::NAME, length: 8)]
-    private Id $userId;
+    #[Groups(['put', 'post'])]
+    private Id $id;
 
     #[ORM\Column(type: LoginType::NAME, length: 8)]
+    #[Groups(['post', 'get'])]
     private Login $login;
 
     #[ORM\Column(type: PhoneType::NAME, length: 8)]
+    #[Groups(['post', 'get'])]
     private Phone $phone;
 
     #[ORM\Column(type: Types::STRING, length: 255)]
+    #[Groups(['post', 'get'])]
+    #[SerializedName('pass')]
     private string $hashedPassword;
 
     public function __construct(
-        Id $userId,
+        Id $id,
         Login $login,
         Phone $phone,
         string $hashedPassword
     ) {
-        $this->userId = $userId;
+        $this->id = $id;
         $this->login = $login;
         $this->phone = $phone;
         $this->hashedPassword = $hashedPassword;
@@ -56,7 +63,7 @@ class User
 
     public function getId(): Id
     {
-        return $this->userId;
+        return $this->id;
     }
 
     public function getLogin(): Login

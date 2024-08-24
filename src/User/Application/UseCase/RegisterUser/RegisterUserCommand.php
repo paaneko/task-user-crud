@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\User\Application\UseCase\RegisterUser;
 
-use App\User\Application\Dto\AuthUserDto;
 use Symfony\Component\Validator\Constraints as Assert;
 
 final readonly class RegisterUserCommand

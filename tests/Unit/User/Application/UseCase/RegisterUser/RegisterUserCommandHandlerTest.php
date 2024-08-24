@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\User\Application\UseCase\RegisterUser;
 
-use App\Tests\Builder\AuthUserDtoBuilder;
 use App\Tests\Builder\UserBuilder;
 use App\User\Application\UseCase\RegisterUser\RegisterUserCommand;
 use App\User\Application\UseCase\RegisterUser\RegisterUserCommandHandler;

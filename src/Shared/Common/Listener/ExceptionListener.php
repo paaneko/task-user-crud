@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Shared\Common\Listener;
 
 use App\User\Domain\Exception\DomainException;
-use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
@@ -39,7 +40,7 @@ final readonly class ExceptionListener
                     Response::HTTP_BAD_REQUEST
                 )
             );
-        } elseif ($exception instanceof InvalidArgumentException) {
+        } elseif ($exception instanceof \InvalidArgumentException) {
             $event->setResponse(
                 new JsonResponse(
                     ['message' => $exception->getMessage()],

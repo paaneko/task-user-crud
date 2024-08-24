@@ -8,7 +8,6 @@ use App\User\Domain\Entity\User;
 use App\User\Domain\Exception\RolePermissionDeniedException;
 use App\User\Domain\Exception\UserNotFoundException;
 use App\User\Domain\Repository\UserRepositoryInterface;
-use App\User\Domain\ValueObject\Id;
 use App\User\Domain\ValueObject\Login;
 use App\User\Domain\ValueObject\Phone;
 use App\User\Domain\ValueObject\Role;
@@ -24,7 +23,7 @@ final class PutUserCommandHandler
     ) {
     }
 
-    public function handle(PutUserCommand $command): Id
+    public function handle(PutUserCommand $command): User
     {
         $authUserLogin = new Login($command->authUserDto->login);
         $authUserRole = new Role($command->authUserDto->role);
@@ -45,6 +44,6 @@ final class PutUserCommandHandler
 
         $this->entityManager->flush();
 
-        return $user->getId();
+        return $user;
     }
 }

@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Exception\ValidationFailedException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -19,7 +20,8 @@ final class PutUserController extends AbstractController
 {
     public function __construct(
         private ValidatorInterface $validator,
-        private PutUserCommandHandler $commandHandler
+        private PutUserCommandHandler $commandHandler,
+        private SerializerInterface $serializer,
     ) {
     }
 
@@ -53,8 +55,9 @@ final class PutUserController extends AbstractController
             throw new ValidationFailedException($putUserCommand, $violations);
         }
 
-        $userId = $this->commandHandler->handle($putUserCommand);
+        $user = $this->commandHandler->handle($putUserCommand);
+        $response = $this->serializer->serialize($user, 'json', ['groups' => ['put']]);
 
-        return $this->json(['id' => $userId->getValue()], Response::HTTP_OK);
+        return new Response($response, Response::HTTP_OK);
     }
 }
