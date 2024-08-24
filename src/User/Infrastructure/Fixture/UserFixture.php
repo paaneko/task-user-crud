@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\User\Infrastructure\Fixture;
 
 use App\User\Domain\Entity\User;
@@ -10,9 +12,8 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 
-class UserFixture extends Fixture
+final class UserFixture extends Fixture
 {
-
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create();
@@ -20,7 +21,7 @@ class UserFixture extends Fixture
         $adminUser = new User(
             new Id('111'),
             new Login('admin'),
-            new Phone($faker->numberBetween(1, 999999)),
+            new Phone((string) $faker->numberBetween(1, 999999)),
             $faker->sha256()
         );
         $manager->persist($adminUser);
@@ -28,7 +29,7 @@ class UserFixture extends Fixture
         $userUser = new User(
             new Id('123'),
             new Login('user'),
-            new Phone($faker->numberBetween(1, 999999)),
+            new Phone((string) $faker->numberBetween(1, 999999)),
             $faker->sha256()
         );
         $manager->persist($userUser);
@@ -41,11 +42,11 @@ class UserFixture extends Fixture
         );
         $manager->persist($testUser);
 
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 20; ++$i) {
             $user = new User(
-                new Id($faker->numberBetween(999, 999999)),
+                new Id((string) $faker->numberBetween(999, 999999)),
                 new Login($faker->bothify('####????')),
-                new Phone($faker->numberBetween(1, 999999)),
+                new Phone((string) $faker->numberBetween(1, 999999)),
                 $faker->sha256()
             );
             $manager->persist($user);
