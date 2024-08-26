@@ -24,16 +24,13 @@ down:
 	docker compose down --remove-orphans
 
 migrate:
-	${PHP_RUN} bin/console doctrine:migrations:migrate
-
-phpstan-check:
-	${PHP_RUN} vendor/bin/phpstan analyse -l 9
+	${PHP_RUN} php bin/console doctrine:migrations:migrate
 
 psalm-check:
-	${PHP_RUN} vendor/bin/psalm --show-info=true
+	${PHP_RUN} php vendor/bin/psalm --show-info=true
 
 psalm-fix:
-	${PHP_RUN} vendor/bin/psalm --alter --issues=all --dry-run
+	${PHP_RUN} php vendor/bin/psalm --alter --issues=all --dry-run
 
 cs-check:
 	${PHP_RUN} php vendor/bin/php-cs-fixer fix --dry-run --diff
